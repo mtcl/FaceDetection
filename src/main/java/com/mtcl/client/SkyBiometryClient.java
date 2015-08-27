@@ -40,8 +40,10 @@ public class SkyBiometryClient {
 
 			FormDataBodyPart apiKeyBodyPart = new FormDataBodyPart("api_key", api_key);
 			FormDataBodyPart apiSecretBodyPart = new FormDataBodyPart("api_secret", api_secret);
-			FormDataBodyPart facePicBodyPart = new FormDataBodyPart("files", facePic, MediaType.MULTIPART_FORM_DATA_TYPE);
-			//FormDataBodyPart facePicBodyPart = new FormDataBodyPart("urls", "http://www.goldennumber.net/wp-content/uploads/2013/08/florence-colgate-england-most-beautiful-face.jpg");
+			FormDataBodyPart facePicBodyPart = new FormDataBodyPart("files", facePic,
+					MediaType.MULTIPART_FORM_DATA_TYPE);
+			// FormDataBodyPart facePicBodyPart = new FormDataBodyPart("urls",
+			// "http://www.goldennumber.net/wp-content/uploads/2013/08/florence-colgate-england-most-beautiful-face.jpg");
 			FormDataBodyPart attributesBodyPart = new FormDataBodyPart("attributes", "eyes");
 
 			// Construct a MultiPart with two body parts
@@ -52,18 +54,19 @@ public class SkyBiometryClient {
 			// POST the request //
 			ClientResponse response = service.path("faces/detect").accept("application/json")
 					.type(MediaType.MULTIPART_FORM_DATA).post(ClientResponse.class, multiPart);
-			
-			Root root = response.getEntity(Root.class);
-			
-			System.out.println("Response Status : " + root.getStatus());
 
 			if (response.getStatus() != 200) {
+				System.out.println(response.getEntity(String.class));
 				throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
+			} else {
+				Root root = response.getEntity(Root.class);
+
+				System.out.println("Response Status : " + root.getStatus());
+
+				System.out.println("Person's eye is: ");
+
+				System.out.println(root.getPhotos().get(0).getTags().get(0).getAttributes().getEyes().getValue());
 			}
-
-			System.out.println("Person's eye is: ");
-
-			System.out.println(root.getPhotos().get(0).getTags().get(0).getAttributes().getEyes().getValue());
 
 		} catch (Exception e) {
 
