@@ -1,4 +1,4 @@
-package com.mtcl.camera;
+package com.mtcl.utility;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -16,7 +16,7 @@ import com.github.sarxos.webcam.Webcam;
  */
 public class WebcamCapture {
 
-	public static void main(String[] args) throws IOException {
+	public BufferedImage takeImage(){
 		// get default webcam and open it
 		Webcam webcam = Webcam.getDefault();
 		webcam.setViewSize(new Dimension(640, 480));
@@ -25,8 +25,21 @@ public class WebcamCapture {
 		// get image
 		BufferedImage image = webcam.getImage();
 
-		// save image to PNG file
-		ImageIO.write(image, "JPG", new File("face.jpg"));
+		try {
+			// Generate sting filename
+			String name = String.format("face-%d.jpg", System.currentTimeMillis());
+
+			// save image to JPG file
+			ImageIO.write(webcam.getImage(), "png", new File(name));
+
+			System.out.format("File %s has been saved\n", name);
+
+		} catch (IOException t) {
+			t.printStackTrace();
+		}
+		
 		webcam.close();
+
+		return image;
 	}
 }
