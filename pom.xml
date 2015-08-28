@@ -38,7 +38,7 @@
 			<artifactId>jersey-multipart</artifactId>
 			<version>1.19</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-multipart</artifactId>
@@ -63,6 +63,12 @@
 			<groupId>com.github.sarxos</groupId>
 			<artifactId>webcam-capture</artifactId>
 			<version>0.3.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.mhendred.face4j</groupId>
+			<artifactId>face4j-core</artifactId>
+			<version>1.6.2</version>
 		</dependency>
 
 	</dependencies>
