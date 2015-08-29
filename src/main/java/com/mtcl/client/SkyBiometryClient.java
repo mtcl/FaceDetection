@@ -26,6 +26,7 @@ public class SkyBiometryClient {
 			cc.getClasses().add(MultiPartWriter.class);
 			Client client = Client.create(cc);
 
+			//put correct keys here
 			String api_key = "bb6a75cdda9542ac93fce337c539ac111";
 			String api_secret = "060b3895eb534a62bbbbdba93cc2175c1";
 

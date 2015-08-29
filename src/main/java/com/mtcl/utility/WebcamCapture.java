@@ -24,13 +24,12 @@ public class WebcamCapture {
 
 		// get image
 		BufferedImage image = webcam.getImage();
-
+		// Generate sting filename
+		String name = String.format("face-%d.png", System.currentTimeMillis());
+		
 		try {
-			// Generate sting filename
-			String name = String.format("face-%d.jpg", System.currentTimeMillis());
-
 			// save image to JPG file
-			ImageIO.write(webcam.getImage(), "png", new File(name));
+			ImageIO.write(image, "png", new File(name));
 
 			System.out.format("File %s has been saved\n", name);
 
